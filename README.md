@@ -1,7 +1,11 @@
 # Intro to D3
 
-This is our super awesome repo for Intro to D3 at NICAR 2015 ATL ... don't fear the Corgi.
+Class materials for Intro to D3 workshop at 2015 CAR Conference in Atlanta, Georgia on March 3-8
 
-## Outline
+## What you will make
+
+## Class files
 
 ## Resources
+
+Brought to you by Alex Bordens and Darla Cameron
