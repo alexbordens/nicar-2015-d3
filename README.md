@@ -8,4 +8,4 @@ Class materials for Intro to D3 workshop at 2015 CAR Conference in Atlanta, Geor
 
 ## Resources
 
-Brought to you by Alex Bordens and Darla Cameron
+Brought to you by Alex Bordens and Darla Cameron.
