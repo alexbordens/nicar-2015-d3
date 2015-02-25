@@ -4,6 +4,8 @@ Class materials for Intro to D3 workshop at 2015 CAR Conference in Atlanta, Geor
 
 ## What you will make
 
+http://www.caffeineinformer.com/the-caffeine-database
+
 ## Class files
 
 ## Resources

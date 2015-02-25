@@ -1,7 +1,7 @@
 // Our JavaScript 
 function drawChart(dataset) {
 	// @TODO: Define dimensions
-	var margin = {top: 20, right: 25, bottom: 30, left: 25},
+	var margin = {top: 20, right: 25, bottom: 30, left: 50},
 			width = 1024 - margin.right - margin.left,
 			height = 400 - margin.bottom - margin.top;
 
@@ -29,6 +29,18 @@ function drawChart(dataset) {
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	// @TODO: Create axes
+	var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .tickSize(6)
+        .ticks(5)
+        //.tickFormat(function(d){return years[d]});
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .tickSize(-width, 0, 0)
+        .ticks(7)
+        .tickPadding(8)
+        .orient("left");
 
 	// @TODO: Draw dots
 	svg.selectAll(".dot")
@@ -39,6 +51,16 @@ function drawChart(dataset) {
 			.attr("cx", function(d) { return xScale(d.value1); })
 			.attr("cy", function(d) { return yScale(d.value2); })
 			.attr("r", 5);
+
+	//axes
+	svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
 }
 
 // @TODO: Setup document ready function
