@@ -23,6 +23,8 @@
 /*.y.axis g:first-child text { display: none; }*/
 
 /* dot colors */
+/* These are pretty horrible we should consider others */
+/* Reminds me of the Joker from the 70s batman show */
 .soda { fill: steelblue; }
 .energydrink { fill: limegreen; }
 .coffee { fill: none; }
