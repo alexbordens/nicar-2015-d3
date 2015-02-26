@@ -55,13 +55,20 @@ function drawChart(dataset) {
       .data(dataset)
     .enter().append("circle")
       .attr("id", function(d) { return d.place; })
-      .attr("class", function(d) { return "dot " + d.type })
+      .attr("class", function(d) { 
+        if (d.type === 'soda'){
+          console.log(d)
+        }
+        return "dot " + d.type })
       .attr("cx", function(d) { return xScale(d.volume); })
       .attr("cy", function(d) { return yScale(d.strength); })
       .attr("r", function(d) { return d.caffeine/35 })
       .on('mouseover', function(d) { 
-        d3.select(this).classed("active", true);
-        console.log(d)
+        // TODO: tooltips
+        var dot = d3.select(this);
+        dot.classed("active", true);
+        //this line re-appends the hovered circle, which sends it to the front of the others and makes it easier to see
+        this.parentNode.appendChild(this);
       })
       .on('mouseout', function(d) { 
         d3.select(this).classed("active", false); 
