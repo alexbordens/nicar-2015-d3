@@ -27,8 +27,8 @@
 /* Reminds me of the Joker from the 70s batman show */
 .soda { fill: steelblue; }
 .energydrink { fill: limegreen; }
-.coffee { fill: none; }
-.tea { fill: none; }
+.coffee { fill: brown; }
+.tea { fill: crimson; }
 .shots { fill: magenta; }
 
 circle.dot { stroke-width: 1px; stroke: white; }

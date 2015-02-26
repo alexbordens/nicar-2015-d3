@@ -59,8 +59,13 @@ function drawChart(dataset) {
       .attr("cx", function(d) { return xScale(d.volume); })
       .attr("cy", function(d) { return yScale(d.strength); })
       .attr("r", function(d) { return d.caffeine/35 })
-      .on('mouseover', function() { d3.select(this).classed("active", true); })
-      .on('mouseout', function() { d3.select(this).classed("active", false); });
+      .on('mouseover', function(d) { 
+        d3.select(this).classed("active", true);
+        console.log(d)
+      })
+      .on('mouseout', function(d) { 
+        d3.select(this).classed("active", false); 
+      });
 
 }
 
@@ -82,7 +87,7 @@ $(document).ready(function() {
         // Filtering data types looking for something possibly interesting
         // Can edit the csv once we decide on something and ditch all this
         // test array business
-        if(d.type !== 'tea' && d.type !== 'coffee') {
+        if(d.type !== 'energydrink' && d.type !== 'shots') {
           test.push(d);
         }
       });
