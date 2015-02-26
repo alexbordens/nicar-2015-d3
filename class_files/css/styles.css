@@ -1,1 +1,33 @@
 /* Our stylesheet */
+
+.axis path,
+.axis line {
+  fill: none;
+}
+
+.y.axis path {
+  display: none;
+}
+
+.y.axis line {
+  stroke: #ccc;
+  stroke-width: 1px;
+}
+
+.axis text {
+  font-family: 'arial', sans-serif;
+  fill: #777;
+  font-size: 12px; 
+}
+
+/*.y.axis g:first-child text { display: none; }*/
+
+/* dot colors */
+.soda { fill: steelblue; }
+.energydrink { fill: limegreen; }
+.coffee { fill: none; }
+.tea { fill: none; }
+.shots { fill: magenta; }
+
+circle.dot { stroke-width: 1px; stroke: white; }
+circle.active { stroke: black; }
