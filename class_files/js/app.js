@@ -47,14 +47,15 @@ function drawChart(dataset) {
   // Add an element attribute to define the width of the svg; we want to add in our margins so the svg is at the maximum width
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom) // Same with the height
-    .append("g") // Create a g element where we will group our chart content
+    .append("g") // Create a g element where we will group chart content
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Offset the g element to match our margins and reset our coordinate system to the group element
 
   // TODO: Draw axes
+  // Create a g element to group eax axis
   svg.append("g")
-    .attr("class", "x axis")
+    .attr("class", "x axis") // Add some CSS classes for styling selectors
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .call(xAxis); // Call our function to display axis elements
 
   svg.append("g")
     .attr("class", "y axis")
