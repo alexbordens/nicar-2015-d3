@@ -9,13 +9,22 @@ function drawChart(dataset) {
       height = 600 - margin.bottom - margin.top;
 
   // TODO: Define scales
+  // Use d3's min and max methods to find the extent of our data we plan to display on each axis
   var xMin = d3.min(dataset, function(d) { return d.volume; }),
       xMax = d3.max(dataset, function(d) { return d.volume; }),
       yMin = d3.min(dataset, function(d) { return d.strength; }),
       yMax = d3.max(dataset, function(d) { return d.strength; });
 
+  // Create a variable to store a function we will use to create our x scale
+  // We first need to access d3's scale generator and the type of scale we want
+  // In this case a linear scale to go with our continuous data
+  // We will then chain additional methods to better define our scale
   var xScale = d3.scale.linear()
+  // The input domain represents the range of possible input values, or the min and max of that data on the x axis
+  // In most cases the domain method takes an array of two values
       .domain([xMin, xMax])
+  // The output range represents the range of possible output values, or more simply the size of our visualization
+  // as it renders on the page in pixels. In this case we want to start at 0 and end at the width of chart as defined earlier
       .range([0, width]);
                     
   var yScale = d3.scale.linear()
@@ -24,10 +33,11 @@ function drawChart(dataset) {
 
   // TODO: Create axes
   var xAxis = d3.svg.axis()
-        .scale(xScale)
-        .tickSize(6)
-        .ticks(5);
-        //.tickFormat(function(d){return years[d]});
+  // Remember when I said the xScale is a function, well it's also an object with information
+  // that tells our axis how tall or wide it should draw and also how to label it
+      .scale(xScale)
+      .ticks(10); // How many labels do we want on our axis?
+      //.tickFormat(function(d){return years[d]});
 
   var yAxis = d3.svg.axis()
       .scale(yScale)
