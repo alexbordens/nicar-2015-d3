@@ -15,7 +15,7 @@ function drawChart(dataset) {
       yMin = d3.min(dataset, function(d) { return d.strength; }),
       yMax = d3.max(dataset, function(d) { return d.strength; });
 
-  // Create a variable to store a function we will use to create our x scale
+  // Create a variable to store a function we will use to translate our x data to the x axis of our chart
   // We first need to access d3's scale generator and the type of scale we want
   // In this case a linear scale to go with our continuous data
   // We will then chain additional methods to better define our scale
@@ -29,22 +29,23 @@ function drawChart(dataset) {
                     
   var yScale = d3.scale.linear()
       .domain([yMin, yMax])
-      .range([height, 0]);
+      .range([height, 0]); // We need to flip the order of the values for the y or the data will be upside down
 
   // TODO: Create axes
+  // Create a function to display the visual elements of our axis
+  // We'll start with D3's basic axis function
   var xAxis = d3.svg.axis()
   // Remember when I said the xScale is a function, well it's also an object with information
   // that tells our axis how tall or wide it should draw and also how to label it
-      .scale(xScale)
+      .scale(xScale) // Tell our axis which scale we want
       .ticks(10); // How many labels do we want on our axis?
-      //.tickFormat(function(d){return years[d]});
 
   var yAxis = d3.svg.axis()
       .scale(yScale)
-      .tickSize(-width, 0, 0)
+      .tickSize(-width) // Draw our y axis lines all the way across our chart. The size needs to be negative since we flipped our chart to look right side up
       .ticks(7)
-      .tickPadding(8)
-      .orient("left");
+      .tickPadding(8) // Add a little spacing between the lines and labels
+      .orient('left'); // Align our scale to the left
 
   // TODO: Create SVG
   var svg = d3.select("#chart-container").append("svg")
@@ -107,7 +108,7 @@ $(document).ready(function() {
         // Filtering data types looking for something possibly interesting
         // Can edit the csv once we decide on something and ditch all this
         // test array business
-        if(d.type !== 'energydrink' && d.type !== 'shots') {
+        if(d.type !== 'coffee' && d.type !== 'tea') {
           test.push(d);
         }
       });
