@@ -1,11 +1,18 @@
 // Our JavaScript 
 function drawChart(dataset) {
   // TODO: Define dimensions
+  // Define a couple variables we will use to set the dimensions of our chart
+  // Margins is an object that contains four attributes that we'll use to calculate
+  // the svg element and inner element's height and width
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
 
   // TODO: Define scales
+  // Use d3's min and max methods to find the extent of our data we plan to display on each axis
+  // We need to tell d3 what data to find the min and max of so we first specify our data set
+  // Then we use an anonymous function and a placeholdere "d" to represent our current data
+  // and return the value
   var xMin = d3.min(dataset, function(d) { return d.volume; }),
       xMax = d3.max(dataset, function(d) { return d.volume; }),
       yMin = d3.min(dataset, function(d) { return d.strength; }),
@@ -43,34 +50,33 @@ function drawChart(dataset) {
   // Create a variable for the svg element we are about to create
   // First we'll select the div on our page that we created as a target for our chart
   // Then nest an svg element inside
-  var svg = d3.select("#chart-container").append('svg')
+  var svg = d3.select('#chart-container').append('svg')
   // Add an element attribute to define the width of the svg; we want to add in our margins so the svg is at the maximum width
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom) // Same with the height
-    .append("g") // Create a g element where we will group chart content
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Offset the g element to match our margins and reset our coordinate system to the group element
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom) // Same with the height
+    .append('g') // Create a g element where we will group chart content
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')'); // Offset the g element to match our margins and reset our coordinate system to the group element
 
   // TODO: Draw axes
   // Create a g element to group eax axis
-  svg.append("g")
-    .attr("class", "x axis") // Add some CSS classes for styling selectors
-    .attr("transform", "translate(0," + height + ")")
+  svg.append('g')
+    .attr('class', 'x axis') // Add some CSS classes for styling selectors
+    .attr('transform', 'translate(0,' + height + ')')
     .call(xAxis); // Call our function to display axis elements
 
-  svg.append("g")
-    .attr("class", "y axis")
+  svg.append('g')
+    .attr('class', 'y axis')
     .call(yAxis);
 
   // TODO: Draw dots
-  svg.selectAll(".dot")
-      .data(dataset)
-    .enter().append("circle")
-      .attr("id", function(d) { return d.place; })
-      .attr("class", function(d) { 
-        if (d.type === 'soda'){
-          console.log(d)
-        }
-        return "dot " + d.type })
+  // The variable 'svg' already represents our selected svg element on the page
+  svg.selectAll('circle') // Selects all circle elements in our svg, which don't exist yet so it's empty .. confused yet? .. stick with me
+      .data(dataset) // Counts and parses our data then binds it to the elements. We will create a circle element for every data value (row in our csv)
+      .enter() // Here's where the magic happens. D3 puts data for any "missing" elements in the enter selection
+    .append('circle') // Then we append a circle element for each value in the enter selection and appened to our svg (parent element)
+      .attr('class', function(d) { //
+        return "dot " + d.type; 
+      })
       .attr("cx", function(d) { return xScale(d.volume); })
       .attr("cy", function(d) { return yScale(d.strength); })
       .attr("r", function(d) { return d.caffeine/35 })
