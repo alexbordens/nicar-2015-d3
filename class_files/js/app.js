@@ -40,21 +40,25 @@ function drawChart(dataset) {
       .orient('left'); // Align our scale to the left
 
   // TODO: Create SVG
-  var svg = d3.select("#chart-container").append("svg")
+  // Create a variable for the svg element we are about to create
+  // First we'll select the div on our page that we created as a target for our chart
+  // Then nest an svg element inside
+  var svg = d3.select("#chart-container").append('svg')
+  // Add an element attribute to define the width of the svg; we want to add in our margins so the svg is at the maximum width
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("height", height + margin.top + margin.bottom) // Same with the height
+    .append("g") // Create a g element where we will group our chart content
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Offset the g element to match our margins and reset our coordinate system to the group element
 
   // TODO: Draw axes
   svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
 
   // TODO: Draw dots
   svg.selectAll(".dot")
