@@ -1,6 +1,9 @@
 // Our JavaScript 
 function drawChart(dataset) {
   // TODO: Define dimensions
+  // Define a couple variables we will use to set the dimensions of our chart
+  // Margins is an object that contains four attributes that we'll use to calculate
+  // the svg element and inner element's height and width
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
@@ -26,12 +29,12 @@ function drawChart(dataset) {
         .ticks(5);
         //.tickFormat(function(d){return years[d]});
 
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .tickSize(-width, 0, 0)
-        .ticks(7)
-        .tickPadding(8)
-        .orient("left");
+  var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .tickSize(-width, 0, 0)
+      .ticks(7)
+      .tickPadding(8)
+      .orient("left");
 
   // TODO: Create SVG
   var svg = d3.select("#chart-container").append("svg")
@@ -42,13 +45,13 @@ function drawChart(dataset) {
 
   // TODO: Draw axes
   svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
 
   // TODO: Draw dots
   svg.selectAll(".dot")
