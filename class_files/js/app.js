@@ -9,10 +9,10 @@ function drawChart(dataset) {
       height = 600 - margin.bottom - margin.top;
 
   // TODO: Define scales
-  // Use d3's min and max methods to find the extent of our data we plan to display on each axis
+  // Use d3's min and max function to find the extent of our data we plan to display on each axis
   // We need to tell d3 what data to find the min and max of so we first specify our data set
-  // Then we use an anonymous function and a placeholdere "d" to represent our current data
-  // and return the value
+  // Then we use an anonymous function and a placeholder "d" to represent our current data
+  // and return the value 
   var xMin = d3.min(dataset, function(d) { return d.volume; }),
       xMax = d3.max(dataset, function(d) { return d.volume; }),
       yMin = d3.min(dataset, function(d) { return d.strength; }),
@@ -74,12 +74,12 @@ function drawChart(dataset) {
       .data(dataset) // Counts and parses our data then binds it to the elements. We will create a circle element for every data value (row in our csv)
       .enter() // Here's where the magic happens. D3 puts data for any "missing" elements in the enter selection
     .append('circle') // Then we append a circle element for each value in the enter selection and appened to our svg (parent element)
-      .attr('class', function(d) { //
-        return "dot " + d.type; 
+      .attr('class', function(d) { // Creates an class attribute and using another anonymous function passes our data (d)
+        return "dot " + d.type; // Then we return the string, dot, and the type attribute in our data value, which are now assinged as CSS classes
       })
-      .attr("cx", function(d) { return xScale(d.volume); })
-      .attr("cy", function(d) { return yScale(d.strength); })
-      .attr("r", function(d) { return d.caffeine/35 })
+      .attr('cx', function(d) { return xScale(d.volume); })
+      .attr('cy', function(d) { return yScale(d.strength); })
+      .attr('r', function(d) { return d.caffeine/35 })
       .on('mouseover', function(d) { 
         // TODO: tooltips
         var dot = d3.select(this);
