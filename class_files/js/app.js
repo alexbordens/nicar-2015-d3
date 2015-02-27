@@ -11,8 +11,9 @@ function drawChart(dataset) {
   // TODO: Define scales
   // Use d3's min and max function to find the extent of our data we plan to display on each axis
   // We need to tell d3 what data to find the min and max of so we first specify our data set
-  // Then we use an anonymous function and a placeholder "d" to represent our current data
-  // and return the value 
+  // Since our data is an array of objects (not one dimensional) we pass an anonymous function 
+  // and a placeholder "d" to represent our current data as an arugement for the method to loop over
+  // and specify the what value we want to be compared
   var xMin = d3.min(dataset, function(d) { return d.volume; }),
       xMax = d3.max(dataset, function(d) { return d.volume; }),
       yMin = d3.min(dataset, function(d) { return d.strength; }),
