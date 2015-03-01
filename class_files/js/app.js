@@ -14,10 +14,10 @@ function drawChart(dataset) {
   // Since our data is an array of objects (not one dimensional) we pass an anonymous function 
   // and a placeholder "d" to represent our current data as an arugement for the method to loop over
   // and specify the what value we want to be compared
-  var xMin = d3.min(dataset, function(d) { return d.volume; }),
-      xMax = d3.max(dataset, function(d) { return d.volume; }),
-      yMin = d3.min(dataset, function(d) { return d.strength; }),
-      yMax = d3.max(dataset, function(d) { return d.strength; });
+  var xMin = d3.min(dataset, function(d) { return d['volume']; }), // Accessing the attribute, volume, via bracke notation
+      xMax = d3.max(dataset, function(d) { return d['volume']; }),
+      yMin = d3.min(dataset, function(d) { return d['strength']; }),
+      yMax = d3.max(dataset, function(d) { return d['strength']; });
 
   // Create a variable to store a function we will use to translate our x data to the x axis of our chart
   // We first need to access d3's scale generator and the type of scale we want
@@ -59,7 +59,10 @@ function drawChart(dataset) {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')'); // Offset the g element to match our margins and reset our coordinate system to the group element
 
   // TODO: Draw axes
-  // Create a g element to group eax axis
+  // Since we are appending new elements to an existing element "drawing" order matters
+  // We want our scales to be "behind" our scatterplot points on the screen so we need to call 
+  // those drawing functions first
+  // Create a g element to group each axis
   svg.append('g')
     .attr('class', 'x axis') // Add some CSS classes for styling selectors
     .attr('transform', 'translate(0,' + height + ')')
@@ -78,34 +81,44 @@ function drawChart(dataset) {
       .attr('class', function(d) { // Creates an class attribute and using another anonymous function passes our data (d)
         return "dot " + d.type; // Then we return the string, dot, and the type attribute in our data value, which are now assinged as CSS classes
       })
-      .attr('cx', function(d) { return xScale(d.volume); })
-      .attr('cy', function(d) { return yScale(d.strength); })
-      .attr('r', function(d) { return d.caffeine/35 })
+      .attr('cx', function(d) { return xScale(d['volume']); }) // cx defines a circle element's x-axis coordinate
+      .attr('cy', function(d) { return yScale(d['strength']); }) // cy defines a circle element's y-axis coordinate
+      .attr('r', function(d) { return d['caffeine']/35 }) // r defines the radius of our circle
       .on('mouseover', function(d) { 
         // TODO: tooltips
-        var dot = d3.select(this);
-        dot.classed("active", true);
-        //this line re-appends the hovered circle, which sends it to the front of the others and makes it easier to see
-        this.parentNode.appendChild(this);
+        var dot = d3.select(this); // Creates a variable for the moused over element
+        dot.classed('active', true); // Adds an css class to our current element
+
+        this.parentNode.appendChild(this); // Re-appends the hovered circle, which sends it to the front of the others and makes it easier to see
       })
-      .on('mouseout', function(d) { 
-        d3.select(this).classed("active", false); 
+      .on('mouseout', function(d) {
+        var dot = d3.select(this); 
+        d3.select(this).classed("active", false); // Removes the css class
       });
 
 }
 
 // TODO: Setup document ready function
+// Waiting for the DOM to be fully constructed before executing our javascript
+// This assures that all our HTML an CSS are on the page and is the equivalent
+// to including your code just before your body close tag
 $(document).ready(function() {
 
-  var test = [];
-
   // TODO: Load data
+  // Use D3's built in CSV parser and will invoke either a callback for our parsed rows or an error callback
+  // The parsed rows will now be in the form of an array of objects
   d3.csv('data/caffeine.csv', function(error, data) {
+    // If there is an error loading our data execute the log statement
     if(error) {
       console.log('BUSTED!'); 
     } else {
+      var test = [];
+
+      // D3 csv request and parser always returns every value as a string. We need to convert a couple of our
+      // data into numbers to display on the chart
+      // We loop over each value in our data array and convert our strings to numbers using the + operator
       data.forEach(function(d) {
-        d.volume = +d.volume;
+        d.volume = +d.volume; // convert our volume attribute into a number
         d.caffeine = +d.caffeine;
         d.strength = +d.strength;
 
@@ -116,6 +129,7 @@ $(document).ready(function() {
           test.push(d);
         }
       });
+      // Call our draw chart function with our data that is ready for visualizing
       drawChart(test);
     }
   });
