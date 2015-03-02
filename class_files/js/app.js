@@ -16,7 +16,6 @@
 
 function drawChart(dataset) {
 
-  // Select our tooltip
   var $tooltip = $('#tooltip');
 
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
@@ -80,16 +79,17 @@ function drawChart(dataset) {
 
         //this.parentNode.appendChild(this);
 
-        $tooltip.find('.beverage').html('<span>'+ d['drink'] + '</span>');
-        $tooltip.find('.volume').html("Volume: " + d['volume']);
-        $tooltip.find('.caffeine').html("Caffeine: " + d['caffeine']);
-        $tooltip.find('.strength').html("Strength: " + d['strength']);
+        $tooltip.find('.beverage').html(d['drink']);
+        $tooltip.find('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
+        $tooltip.find('.caffeine').html("Caffeine: " + '<span>'+ d['caffeine'] + '</span>');
+        $tooltip.find('.strength').html("Strength: " + '<span>'+ d['strength'] + '</span>');
 
-        $tooltip.css('visibility', 'visible');
+        return $tooltip.css('visibility', 'visible');
       })
       .on('mousemove', function(){
+
         var tipWidth = $tooltip.width();
-        //set position of the tooltip based on mouse position
+
         if (d3.event.offsetX > ((width - tipWidth))) {
           return $tooltip
             .css('top', (d3.event.pageY - 40) + 'px')
@@ -104,7 +104,7 @@ function drawChart(dataset) {
         var dot = d3.select(this); 
         d3.select(this).classed("active", false);
 
-        $tooltip.css('visibility', 'hidden');
+        return $tooltip.css('visibility', 'hidden');
       });
 
 }
