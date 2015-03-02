@@ -16,6 +16,9 @@
 
 function drawChart(dataset) {
 
+  // Select our tooltip
+  var $tooltip = $('#tooltip');
+
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
@@ -65,20 +68,43 @@ function drawChart(dataset) {
       .enter()
     .append('circle')
       .attr('class', function(d) { 
-        return "dot " + d.type;
+        return "dot " + d['type'];
       })
       .attr('cx', function(d) { return xScale(d['volume']); })
       .attr('cy', function(d) { return yScale(d['strength']); })
       .attr('r', function(d) { return d['caffeine']/15 })
       .on('mouseover', function(d) { 
-        var dot = d3.select(this);ß
+
+        var dot = d3.select(this);
         dot.classed('active', true);
 
-        this.parentNode.appendChild(this);
+        //this.parentNode.appendChild(this);
+
+        $tooltip.find('.beverage').html('<span>'+ d['drink'] + '</span>');
+        $tooltip.find('.volume').html("Volume: " + d['volume']);
+        $tooltip.find('.caffeine').html("Caffeine: " + d['caffeine']);
+        $tooltip.find('.strength').html("Strength: " + d['strength']);
+
+        $tooltip.css('visibility', 'visible');
+      })
+      .on('mousemove', function(){
+        var tipWidth = $tooltip.width();
+        //set position of the tooltip based on mouse position
+        if (d3.event.offsetX > ((width - tipWidth))) {
+          return $tooltip
+            .css('top', (d3.event.pageY - 40) + 'px')
+            .css('left',(d3.event.pageX - (tipWidth + 32)) + 'px');
+        } else {
+          return $tooltip
+            .css('top', (d3.event.pageY - 40) + 'px')
+            .css('left',(d3.event.pageX + 10) + 'px');
+        }
       })
       .on('mouseout', function(d) {
         var dot = d3.select(this); 
         d3.select(this).classed("active", false);
+
+        $tooltip.css('visibility', 'hidden');
       });
 
 }

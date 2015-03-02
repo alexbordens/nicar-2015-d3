@@ -20,8 +20,6 @@
   font-size: 12px; 
 }
 
-/*.y.axis g:first-child text { display: none; }*/
-
 /* dot colors */
 /* These are pretty horrible we should consider others */
 /* Reminds me of the Joker from the 70s batman show */
@@ -33,3 +31,28 @@
 
 circle.dot { stroke-width: 1px; stroke: white; }
 circle.active { stroke: black; }
+
+/* Tooltip styles */
+#tooltip {
+	position: absolute;
+	z-index: 10;
+	visibility: hidden;
+}
+
+#tooltip {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .8);
+  border: 1px solid #777;
+  pointer-events: none;
+  font-family: 'arial', sans-serif; 
+  font-size: 14px; 
+}
+
+#tooltip p { margin: 0 0 5px; }
+#tooltip p:first-child { font-size: 16px; }
+
+#tooltip p.date, 
+#tooltip span { font-weight: bold; }
