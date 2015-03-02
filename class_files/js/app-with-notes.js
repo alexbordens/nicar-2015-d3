@@ -142,32 +142,3 @@ $(document).ready(function() {
   });
 
 });
-
-
-// Refactor for reuse
-// function drawChart(options) {
-
-// }
-
-// function createScales(options) {
-//  var yMin = options.yMin ? options.yMin : d3.min(options.dataset, function(d) { return d['yKey']; }),
-//      yMax = options.yMax ? options.yMax : d3.max(options.dataset, function(d) { return d['yKey']; }),
-//      xMin = options.xMin ? options.xMin : d3.min(options.dataset, function(d) { return d['xKey']; }),
-//      xMax = options.xMax ? options.xMax : d3.max(options.dataset, function(d) { return d['xKey']; });
-// }
-
-// Ways to call our function
-// drawChart({
-//    el: '#chart-container',
-//    yScaleExtent: [0,10],
-//    xScaleExtent: [200, 1600],
-//    dataset: data,
-//    xValue: value1,
-//    yValue: value2
-//  }
-// );
-
-// buildChart(el, xValue, yValue, dataset, xScaleExtent, yScaleExtent) {
-//
-//}
-
