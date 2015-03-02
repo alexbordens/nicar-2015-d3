@@ -20,11 +20,13 @@ function drawChart(dataset) {
       yMax = d3.max(dataset, function(d) { return d['strength']; });
 
   // Create a variable to store a function we will use to translate our x data to the x axis of our chart
-  // We first need to access d3's scale generator and the type of scale we want
-  // In this case a linear scale to go with our continuous data
-  // We will then chain additional methods to better define our scale
+  // We first need to create a linear scale and confifure for our data
   var xScale = d3.scale.linear()
+  // The input domain represents the range of possible input values, or the min and max of that data on the x axis
+  // In most cases the domain method takes an array of two values
       .domain([xMin, xMax])
+  // The output range represents the range of possible output values, or more simply the size of our visualization
+  // as it renders on the page in pixels. In this case we want to start at 0 and end at the width of chart as defined earlier
       .range([0, width]);
                     
   var yScale = d3.scale.linear()
@@ -83,7 +85,7 @@ function drawChart(dataset) {
       })
       .attr('cx', function(d) { return xScale(d['volume']); }) // cx defines a circle element's x-axis coordinate
       .attr('cy', function(d) { return yScale(d['strength']); }) // cy defines a circle element's y-axis coordinate
-      .attr('r', function(d) { return d['caffeine']/35 }) // r defines the radius of our circle
+      .attr('r', function(d) { return d['caffeine']/15 }) // r defines the radius of our circle
       .on('mouseover', function(d) { 
         // TODO: tooltips
         var dot = d3.select(this); // Creates a variable for the moused over element
@@ -106,6 +108,7 @@ $(document).ready(function() {
 
   // TODO: Load data
   // Use D3's built in CSV parser and will invoke either a callback for our parsed rows or an error callback
+  // TODO: define callback
   // The parsed rows will now be in the form of an array of objects
   d3.csv('data/caffeine.csv', function(error, data) {
     // If there is an error loading our data execute the log statement
@@ -125,7 +128,7 @@ $(document).ready(function() {
         // Filtering data types looking for something possibly interesting
         // Can edit the csv once we decide on something and ditch all this
         // test array business
-        if(d.type !== 'coffee' && d.type !== 'tea') {
+        if(d.type === 'soda') {
           test.push(d);
         }
       });
