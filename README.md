@@ -11,3 +11,8 @@ http://www.caffeineinformer.com/the-caffeine-database
 ## Resources
 
 Brought to you by Alex Bordens and Darla Cameron.
+
+## To Do
+- Finish presentation- get code bits in there and place the corgis accordingly
+- Add tooltips
+- Pull out separate version of the js file, then give them both that and the annotated one
