@@ -1,7 +1,8 @@
 // Our JavaScript 
 function drawChart(dataset) {
+
   // Select our tooltip
-  var $tooltip = $('#tooltip');
+  var tooltip = d3.select('#tooltip');
 
   // TODO: Define dimensions
   // Define a couple variables we will use to set the dimensions of our chart
@@ -94,44 +95,46 @@ function drawChart(dataset) {
       .attr('cy', function(d) { return yScale(d['strength']); }) // cy defines a circle element's y-axis coordinate
       .attr('r', function(d) { return d['caffeine']/15 }) // r defines the radius of our circle
       .on('mouseover', function(d) { // Add an event listener to each element in our selection that will be invoked when the cursor hovers over the element
-        // TODO: tooltips
         var dot = d3.select(this); // Creates a variable for the moused over element
         dot.classed('active', true); // Adds an css class to our current element
 
         this.parentNode.appendChild(this); // Re-appends the hovered circle, which sends it to the front of the others and makes it easier to see
 
+        // TODO: tooltips
         // Add out data to the tooltip by "finding" the element with the appropriate class and setting the html contents of the element
-        // Notice we can add more html into our element, such as a span?
-        $tooltip.find('.beverage').html(d['drink']);
-        $tooltip.find('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
-        $tooltip.find('.caffeine').html("Caffeine: " + '<span>'+ d['caffeine'] + '</span>');
-        $tooltip.find('.strength').html("Strength: " + '<span>'+ d['strength'] + '</span>');
+        // We use selectAll to find the element we want. Notice we can add more html into our element, such as a span?
+        tooltip.selectAll('.beverage').html(d['drink']);
+        tooltip.selectAll('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
+        tooltip.selectAll('.caffeine').html("Caffeine: " + '<span>'+ d['caffeine'] + '</span>');
+        tooltip.selectAll('.strength').html("Strength: " + '<span>'+ d['strength'] + '</span>');
 
         // Show the tooltip and end the function with return
-        return $tooltip.css('visibility', 'visible');
+        return tooltip.style('visibility', 'visible');
 
       })
       .on('mousemove', function(){ // Add an event listener that will be invoked when the cursor moves on an element
         // Find the width of our tooltip. We'll need this to know if we should flip the tooltip to the other side of the cursor
-        var tipWidth = $tooltip.width();
+        // Notice tooltip.style('width') is a string with a 'px' suffix? That will make it difficult to compare it to another number
+        // so we'll use javascripts parseInt function to conver our string to a number
+        var tipWidth = parseInt(tooltip.style('width'), 10);
         // Set position of the tooltip based on mouse position
         // First determine the x position of the cursor and if there is enough room to the right to fit the tooltip
-        // without spilling out of the svg. d3.event stores the current event and .offsetX returns the X position
+        // without spilling out of the svg. d3.event stores the current event and .offsetX property contains the X position
         // of cursor relative to the svg container
         if (d3.event.offsetX > ((width - tipWidth))) {
           // If there isn't enough space the flip the tooltip to the left of the cursor
-          return $tooltip
+          return tooltip
             // Move the tooltip 40 pixels from the top of the tooltip; .pageY returns the Y position of the cursor
-            // .pageY returns a position relative to the document
-            .css('top', (d3.event.pageY - 40) + 'px')
+            // .pageY property stores a position relative to the document
+            .style('top', (d3.event.pageY - 40) + 'px')
             // Move the tooltip to the left of the cursor by the width of the tooltip plus a little extra
             // so the tooltip isn't centered on the cursor
-            .css('left',(d3.event.pageX - (tipWidth + 32)) + 'px');
+            .style('left',(d3.event.pageX - (tipWidth + 32)) + 'px');
         } else {
           // If there is enough space place the tooltip to the right of the cursor
-          return $tooltip
-            .css('top', (d3.event.pageY - 40) + 'px')
-            .css('left',(d3.event.pageX + 10) + 'px');
+          return tooltip
+            .style('top', (d3.event.pageY - 40) + 'px')
+            .style('left',(d3.event.pageX + 10) + 'px');
         }
       })
       .on('mouseout', function(d) { // Add an event listener that will be invoked when the cursor moves off the element
@@ -139,7 +142,7 @@ function drawChart(dataset) {
         d3.select(this).classed("active", false); // Removes the css class
 
         // Hide the tooltip and end the function with return
-        return $tooltip.css('visibility', 'hidden');
+        return tooltip.style('visibility', 'hidden');
       });
 
 }

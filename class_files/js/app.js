@@ -16,7 +16,9 @@
 
 function drawChart(dataset) {
 
-  var $tooltip = $('#tooltip');
+  var tooltip = d3.select('#tooltip');
+
+  console.log(tooltip);
 
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
@@ -79,32 +81,32 @@ function drawChart(dataset) {
 
         //this.parentNode.appendChild(this);
 
-        $tooltip.find('.beverage').html(d['drink']);
-        $tooltip.find('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
-        $tooltip.find('.caffeine').html("Caffeine: " + '<span>'+ d['caffeine'] + '</span>');
-        $tooltip.find('.strength').html("Strength: " + '<span>'+ d['strength'] + '</span>');
+        tooltip.selectAll('.beverage').html(d['drink']);
+        tooltip.selectAll('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
+        tooltip.selectAll('.caffeine').html("Caffeine: " + '<span>'+ d['caffeine'] + '</span>');
+        tooltip.selectAll('.strength').html("Strength: " + '<span>'+ d['strength'] + '</span>');
 
-        return $tooltip.css('visibility', 'visible');
+        return tooltip.style('visibility', 'visible');
       })
       .on('mousemove', function(){
 
-        var tipWidth = $tooltip.width();
+        var tipWidth = parseInt(tooltip.style('width'), 10);
 
         if (d3.event.offsetX > ((width - tipWidth))) {
-          return $tooltip
-            .css('top', (d3.event.pageY - 40) + 'px')
-            .css('left',(d3.event.pageX - (tipWidth + 32)) + 'px');
+          return tooltip
+            .style('top', (d3.event.pageY - 40) + 'px')
+            .style('left',(d3.event.pageX - (tipWidth + 32)) + 'px');
         } else {
-          return $tooltip
-            .css('top', (d3.event.pageY - 40) + 'px')
-            .css('left',(d3.event.pageX + 10) + 'px');
+          return tooltip
+            .style('top', (d3.event.pageY - 40) + 'px')
+            .style('left',(d3.event.pageX + 10) + 'px');
         }
       })
       .on('mouseout', function(d) {
         var dot = d3.select(this); 
         d3.select(this).classed("active", false);
 
-        return $tooltip.css('visibility', 'hidden');
+        return tooltip.style('visibility', 'hidden');
       });
 
 }
