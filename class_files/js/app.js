@@ -18,8 +18,6 @@ function drawChart(dataset) {
 
   var tooltip = d3.select('#tooltip');
 
-  console.log(tooltip);
-
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
@@ -68,9 +66,7 @@ function drawChart(dataset) {
       .data(dataset)
       .enter()
     .append('circle')
-      .attr('class', function(d) { 
-        return "dot " + d['type'];
-      })
+      .attr('class', function(d) { return "dot " + d['type']; })
       .attr('cx', function(d) { return xScale(d['volume']); })
       .attr('cy', function(d) { return yScale(d['strength']); })
       .attr('r', function(d) { return d['caffeine']/15 })
@@ -103,6 +99,7 @@ function drawChart(dataset) {
         }
       })
       .on('mouseout', function(d) {
+
         var dot = d3.select(this); 
         d3.select(this).classed("active", false);
 
