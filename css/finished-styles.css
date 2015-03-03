@@ -1,0 +1,56 @@
+/* Our stylesheet */
+.axis path,
+.axis line {
+  fill: none;
+}
+
+.y.axis path { display: none; }
+
+.y.axis line {
+  stroke: #ccc;
+  stroke-width: 1px;
+}
+
+.axis text {
+  font-family: 'arial', sans-serif;
+  fill: #777;
+  font-size: 12px; 
+}
+
+/* dot colors */
+/* These are pretty horrible we should consider others */
+/* Reminds me of the Joker from the 70s batman show */
+.soda { fill: steelblue; }
+.energydrink { fill: limegreen; }
+.coffee { fill: brown; }
+.tea { fill: crimson; }
+.shots { fill: magenta; }
+
+circle.dot { stroke-width: 1px; stroke: white; }
+
+circle.active { stroke: black; }
+
+/* Tooltip styles */
+#tooltip {
+	position: absolute;
+	z-index: 10;
+	visibility: hidden;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .8);
+  border: 1px solid #777;
+  pointer-events: none;
+  font-family: 'arial', sans-serif; 
+  font-size: 14px; 
+}
+
+#tooltip p { margin: 0 0 5px; }
+
+#tooltip p:first-child { 
+	font-size: 16px; 
+	font-weight: bold; 
+}
+
+#tooltip span { font-weight: bold; }
+
