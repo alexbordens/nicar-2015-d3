@@ -22,7 +22,7 @@ function drawChart(dataset) {
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
 
-  var xMin = d3.min(dataset, function(d) { return d['volume']; }), // Accessing the attribute, volume, via bracke notation
+  var xMin = d3.min(dataset, function(d) { return d['volume']; }),
       xMax = d3.max(dataset, function(d) { return d['volume']; }),
       yMin = d3.min(dataset, function(d) { return d['strength']; }),
       yMax = d3.max(dataset, function(d) { return d['strength']; });
