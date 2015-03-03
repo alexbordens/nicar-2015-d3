@@ -94,7 +94,7 @@ function drawChart(dataset) {
       .attr('cx', function(d) { return xScale(d['volume']); }) // cx defines a circle element's x-axis coordinate
       .attr('cy', function(d) { return yScale(d['strength']); }) // cy defines a circle element's y-axis coordinate
       .attr('r', function(d) { return d['caffeine']/15 }) // r defines the radius of our circle
-      .on('mouseover', function(d) { // Add an event listener to each element in our selection that will be invoked when the cursor hovers over the element
+      .on('mouseover', function(d) { // Add an event listener that will be invoked when the cursor hovers over the element
 
         var dot = d3.select(this); // Creates a variable for the current moused over element
         dot.classed('active', true); // Adds a css class to our current element
