@@ -95,8 +95,13 @@ function drawChart(dataset) {
       .attr('cy', function(d) { return yScale(d['strength']); }) // cy defines a circle element's y-axis coordinate
       .attr('r', function(d) { return d['caffeine']/15 }) // r defines the radius of our circle
       .on('mouseover', function(d) { // Add an event listener to each element in our selection that will be invoked when the cursor hovers over the element
-        var dot = d3.select(this); // Creates a variable for the moused over element
-        dot.classed('active', true); // Adds an css class to our current element
+
+        var dot = d3.select(this); // Creates a variable for the current moused over element
+        dot.classed('active', true); // Adds a css class to our current element
+
+        // Lets pause for a second and talk about this and all its magic. This is a special variable
+        // It changes depending on the context. In this case, 'this' references the DOM node that is the target
+        // of the event that we're handling, which d3 sets for us
 
         this.parentNode.appendChild(this); // Re-appends the hovered circle, which sends it to the front of the others and makes it easier to see
 
