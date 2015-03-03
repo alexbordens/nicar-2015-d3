@@ -18,7 +18,7 @@ function drawChart(dataset) {
   // Since our data is an array of objects (not one dimensional) we pass an anonymous function 
   // and a placeholder "d" to represent our current data as an arugement for the method to loop over
   // and specify the what value we want to be compared
-  var xMin = d3.min(dataset, function(d) { return d['volume']; }), // Accessing the attribute, volume, via bracke notation
+  var xMin = d3.min(dataset, function(d) { return d['volume']; }), // Accessing the attribute, volume, via bracket notation
       xMax = d3.max(dataset, function(d) { return d['volume']; }),
       yMin = d3.min(dataset, function(d) { return d['strength']; }),
       yMax = d3.max(dataset, function(d) { return d['strength']; });
@@ -26,12 +26,13 @@ function drawChart(dataset) {
   // Create a variable to store a function we will use to translate our x data to the x axis of our chart
   // We first need to create a linear scale and configure for our data
   var xScale = d3.scale.linear()
-  // The input domain represents the range of possible input values, or the min and max of that data on the x axis in our case,
-  // but we can define the values however we like
-  // In most cases the domain method takes an array of two values
+  // The input domain represents the range of possible input values, or the min and max of that data 
+  // on the x axis in our case, but we can define the values however we like In most cases the domain 
+  // method takes an array of two values
       .domain([xMin, xMax])
-  // The output range represents the range of possible output values, or more simply the size of our visualization
-  // as it renders on the page in pixels. In this case we want to start at 0 and end at the width of chart as defined earlier
+  // The output range represents the range of possible output values, or more simply the size of our 
+  // visualization as it renders on the page in pixels. In this case we want to start at 0 and end at
+  // the width of chart as defined earlier
       .range([0, width]);
                     
   var yScale = d3.scale.linear()
@@ -58,14 +59,17 @@ function drawChart(dataset) {
   // Create a variable for the svg element we are about to create
   // First we'll select the div on our page that we created as a target for our chart
   // Then nest an svg g element inside
-  // A note about indentations. You'll frequently see different indentations when chaining methods. I always follow a pattern that 
-  // of one indentation for the creation of a new element and two indentations on each line that modifies the new element
+  // A note about indentations. You'll frequently see different indentations when chaining methods. 
+  // I always follow a pattern that of one indentation for the creation of a new element and two 
+  // indentations on each line that modifies the new element
   var svg = d3.select('#chart-container').append('svg')
-  // Add an element attribute to define the width of the svg; we want to add in our margins so the svg is at the maximum width
+  // Add an element attribute to define the width of the svg; we want to add in our margins so 
+  // the svg is at the maximum width
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom) // Same with the height
     .append('g') // Create a g element where we will group chart content.
-    // A g element lets us collect a number of child elements and transform them together, similar to a div in HTML
+    // A g element lets us collect a number of child elements and transform them together, similar 
+    // to a div in HTML
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')'); // Offset the g element to match our margins and reset our coordinate system to the group element
 
   // TODO: Draw axes

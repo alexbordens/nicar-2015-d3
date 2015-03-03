@@ -1,13 +1,10 @@
 /* Our stylesheet */
-
 .axis path,
 .axis line {
   fill: none;
 }
 
-.y.axis path {
-  display: none;
-}
+.y.axis path { display: none; }
 
 .y.axis line {
   stroke: #ccc;
@@ -30,6 +27,7 @@
 .shots { fill: magenta; }
 
 circle.dot { stroke-width: 1px; stroke: white; }
+
 circle.active { stroke: black; }
 
 /* Tooltip styles */
@@ -37,10 +35,6 @@ circle.active { stroke: black; }
 	position: absolute;
 	z-index: 10;
 	visibility: hidden;
-}
-
-#tooltip {
-  position: absolute;
   width: auto;
   height: auto;
   padding: 10px;
@@ -52,7 +46,11 @@ circle.active { stroke: black; }
 }
 
 #tooltip p { margin: 0 0 5px; }
-#tooltip p:first-child { font-size: 16px; font-weight: bold; }
 
-#tooltip p.date, 
+#tooltip p:first-child { 
+	font-size: 16px; 
+	font-weight: bold; 
+}
+
 #tooltip span { font-weight: bold; }
+

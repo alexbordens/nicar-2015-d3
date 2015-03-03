@@ -1,27 +1,16 @@
 // Our JavaScript 
 
-// TODO: Setup document ready function
-// TODO: Load data
 // TODO: Create a chart function
-// TODO: Define dimensions
-// TODO: Define scales
-// TODO: Create axes
-// TODO: Create SVG
-// TODO: Draw axes
-// TODO: Draw dots
-// TODO: Create mouse events
-// TODO: Create tooltips
-
-
-
 function drawChart(dataset) {
 
   var tooltip = d3.select('#tooltip');
 
+  // TODO: Define dimensions
   var margin = {top: 20, right: 25, bottom: 30, left: 50},
       width = 1024 - margin.right - margin.left,
       height = 600 - margin.bottom - margin.top;
 
+  // TODO: Define scales
   var xMin = d3.min(dataset, function(d) { return d['volume']; }),
       xMax = d3.max(dataset, function(d) { return d['volume']; }),
       yMin = d3.min(dataset, function(d) { return d['strength']; }),
@@ -30,12 +19,12 @@ function drawChart(dataset) {
   var xScale = d3.scale.linear()
       .domain([xMin, xMax])
       .range([0, width]);
-                    
+
   var yScale = d3.scale.linear()
       .domain([yMin, yMax])
       .range([height, 0]);
 
-  
+  // TODO: Create axes
   var xAxis = d3.svg.axis()
       .scale(xScale)
       .ticks(10);
@@ -47,12 +36,14 @@ function drawChart(dataset) {
       .tickPadding(8)
       .orient('left');
 
+  // TODO: Create SVG
   var svg = d3.select('#chart-container').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
     .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+  // TODO: Draw axes
   svg.append('g')
     .attr('class', 'x axis')
     .attr('transform', 'translate(0,' + height + ')')
@@ -62,6 +53,7 @@ function drawChart(dataset) {
     .attr('class', 'y axis')
     .call(yAxis);
 
+  // TODO: Draw dots
   svg.selectAll('circle')
       .data(dataset)
       .enter()
@@ -74,8 +66,6 @@ function drawChart(dataset) {
 
         var dot = d3.select(this);
         dot.classed('active', true);
-
-        //this.parentNode.appendChild(this);
 
         tooltip.selectAll('.beverage').html(d['drink']);
         tooltip.selectAll('.volume').html("Volume: " + '<span>'+ d['volume'] + '</span>');
@@ -108,13 +98,16 @@ function drawChart(dataset) {
 
 }
 
+// TODO: Setup document ready function
 $(document).ready(function() {
 
+  // TODO: Load data
   d3.csv('data/caffeine.csv', function(error, data) {
 
     if(error) {
       console.log('BUSTED!'); 
     } else {
+
       var test = [];
 
       data.forEach(function(d) {
@@ -132,5 +125,7 @@ $(document).ready(function() {
   });
 
 });
+
+
 
 
