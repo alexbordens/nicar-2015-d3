@@ -157,9 +157,9 @@ function drawChart(dataset) {
 }
 
 // TODO: Setup document ready function
-// Waiting for the DOM to be fully constructed before executing our javascript
-// This assures that all our HTML an CSS are on the page and is the equivalent
-// to including your code just before your body close tag
+// This jquery function waits for the DOM to be fully constructed before executing our javascript
+// This insures that all our HTML an CSS are on the page and is the equivalent
+// to including your javascript just before your body close tag
 $(document).ready(function() {
 
   // TODO: Load data
