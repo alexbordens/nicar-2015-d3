@@ -20,8 +20,6 @@ html {font-family: 'helvetica', sans-serif;}
 }
 
 /* dot colors */
-/* These are pretty horrible we should consider others */
-/* Reminds me of the Joker from the 70s batman show */
 .soda { fill: #498cb2; }
 .energydrink { fill: #cbb645; }
 .shots { fill: #bb5672; }
@@ -55,7 +53,7 @@ circle.active { stroke: black; }
 #tooltip span { font-weight: bold; }
 
 .key p {
-  float:left; 
+  display: inline;
   margin-right:20px;
 }
 
@@ -66,26 +64,9 @@ circle.active { stroke: black; }
   height: 15px; 
 }
 
-.key .soda { 
-  background-color: #498cb2; 
-}
-
-.key .energydrink { 
-  background-color: #cbb645; 
-}
-
-.key .shots { 
-  background-color: #bb5672; 
-}
+.key .soda { background-color: #498cb2; }
+.key .energydrink { background-color: #cbb645; }
+.key .shots { background-color: #bb5672; }
 
 
-.clear:before,
-.clear:after {
-    content: " ";
-    display: table;
-}
-
-.clear:after {
-    clear: both;
-}
 
