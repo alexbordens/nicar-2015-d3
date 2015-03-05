@@ -1,8 +1,7 @@
 // Our JavaScript 
 
-// TODO: Setup document ready function
-// TODO: Load data
 // TODO: Create a chart function
+// TODO: Load data
 // TODO: Define dimensions
 // TODO: Define scales
 // TODO: Create axes
