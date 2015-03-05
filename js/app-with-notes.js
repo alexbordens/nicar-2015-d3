@@ -154,40 +154,36 @@ function drawChart(dataset) {
         return tooltip.style('visibility', 'hidden');
       });
 
+}
 
-// TODO: Setup document ready function
-// This jquery function waits for the DOM to be fully constructed before executing our javascript
-// This insures that all our HTML an CSS are on the page and is the equivalent
-// to including your javascript just before your body close tag
-$(document).ready(function() {
+// TODO: Load data
+// Use D3's built in CSV parser and will invoke either a callback for our parsed rows or an error callback
+// A callback is simply a function that is called once another function does something, like success of failure
+// The parsed rows will now be in the form of an array of objects
+d3.csv('data/caffeine.csv', function(error, data) {
+  // If there is an error loading our data execute the log statement
+  if(error) {
+    console.log('BUSTED!'); 
+  } else {
+    var test = [];
 
-  // TODO: Load data
-  // Use D3's built in CSV parser and will invoke either a callback for our parsed rows or an error callback
-  // A callback is simply a function that is called once another function does something, like success of failure
-  // The parsed rows will now be in the form of an array of objects
-  d3.csv('data/caffeine.csv', function(error, data) {
-    // If there is an error loading our data execute the log statement
-    if(error) {
-      console.log('BUSTED!'); 
-    } else {
-      var test = [];
+    // D3's csv request and parser always returns every value as a string. We need to convert a couple of our
+    // attributes into numbers to display on the chart
+    // We loop over each value in our data array and convert our strings to numbers using the + operator
+    data.forEach(function(d) {
+      d.volume = +d.volume; // convert our volume attribute into a number
+      d.caffeine = +d.caffeine;
+      d.strength = +d.strength;
 
-      // D3's csv request and parser always returns every value as a string. We need to convert a couple of our
-      // attributes into numbers to display on the chart
-      // We loop over each value in our data array and convert our strings to numbers using the + operator
-      data.forEach(function(d) {
-        d.volume = +d.volume; // convert our volume attribute into a number
-        d.caffeine = +d.caffeine;
-        d.strength = +d.strength;
+      // Filtering data types looking for something possibly interesting
+      // Can edit the csv once we decide on something and ditch all this
+      // test array business
+      if(d.type !== 'tea' && d.type !== 'coffee') {
+        test.push(d);
+      }
+    });
+    // Call our draw chart function with our data that is ready for visualizing
+    drawChart(test);
+  }
+});
 
-        // Filtering data types looking for something possibly interesting
-        // Can edit the csv once we decide on something and ditch all this
-        // test array business
-        if(d.type !== 'tea' && d.type !== 'coffee') {
-          test.push(d);
-        }
-      });
-      // Call our draw chart function with our data that is ready for visualizing
-      drawChart(test);
-    }
-  });
