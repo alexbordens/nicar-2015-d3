@@ -178,7 +178,7 @@ d3.csv('data/caffeine.csv', function(error, data) {
       // Filtering data types looking for something possibly interesting
       // Can edit the csv once we decide on something and ditch all this
       // test array business
-      if(d.type !== 'tea' && d.type !== 'coffee') {
+      if(d.type === 'soda'|| d.type === 'energydrink' || d.type === 'shots') {
         test.push(d);
       }
     });
