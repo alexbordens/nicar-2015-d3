@@ -8,7 +8,7 @@ A scatterplot chart based on this database: http://www.caffeineinformer.com/the-
 
 ## Class files
 
-Class presentation goo.gl/esqDak 
+Class presentation https://docs.google.com/presentation/d/1jYfrl45XL0iA3NqfMxhgKGParE8-mlyFjJ2-lNrvuQ4/pub?start=false&loop=false&delayms=3000&slide=id.p
 
 
 The completed lesson with annotations can be found in the 'finished' directory
