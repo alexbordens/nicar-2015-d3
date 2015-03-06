@@ -10,6 +10,9 @@ A scatterplot chart based on this database: http://www.caffeineinformer.com/the-
 
 Class presentation goo.gl/esqDak 
 
+
+The completed lesson with annotations can be found in the 'finished' directory
+
 ## Resources for learning more
 
 - http://eloquentjavascript.net/
